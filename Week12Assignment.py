@@ -1,12 +1,8 @@
 import string
 
-fileName = "test.txt"
-
-
 def read_in_file(filename):
     wordList = []
-    
-    with open(fileName) as myFile:
+    with open(filename) as myFile:
         for line in myFile:
             for word in line.split():
                 wordList.append(word)
@@ -16,14 +12,11 @@ def Make_Upper_List(inputList):
     UpperList = []
     for word in inputList:
         UpperList.append(word.upper())
+    for word in UpperList:
+        if len(word) <= 3:
+            print(word)
+            UpperList.remove(word)
     return UpperList
-
-for word in UpperList:
-    if len(word) <= 3:
-        print(word)
-        UpperList.remove(word)
-
-print(UpperList)
 
 def createMaxWordsList(inputList):
     keyCount = {}
@@ -34,14 +27,10 @@ def createMaxWordsList(inputList):
             keyCount[word] = 1
         return keyCount
 
-WordsDict = createMaxWordsList(UpperList)
-maxKey = max(WordsDict, key = WordsDict.get
-print(maxKey)
-print(WordsDict[maxKey])
-
 def MainProgram():
     try:
-        fileName = input("provide file name to en")
+        #fileName = input("provide file name to en")
+        fileName = "test.txt"
         WordsList = read_in_file(fileName)
     except:
         print('bad input')
@@ -50,5 +39,10 @@ def MainProgram():
     UpperList = Make_Upper_List(WordsList)
 
     WordCountList = createMaxWordsList(UpperList)
+
+    maxKey = max(WordCountList, key = WordCountList.get)
+
+    print(maxKey)
+    print(WordCountList[maxKey])
     
 MainProgram()
